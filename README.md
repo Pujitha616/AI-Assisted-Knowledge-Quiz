@@ -81,7 +81,7 @@ The project is a **web-based AI-assisted quiz application** that generates engag
 * **Quiz Screen** → Question display, progress bar, navigation.
 * **Results Screen** → Final score, personalized feedback, restart option.
 
-(Screenshots or a short demo video can be attached here.)
+
 
 ---
 
