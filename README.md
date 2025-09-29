@@ -4,10 +4,8 @@ Sample README – AI-Assisted Knowledge Quiz:
 
 ## 1. Project Setup & Demo
 Web: Run `npm install && npm start` to launch locally.  
-Mobile:  
-- For iOS: open project in Xcode and run on simulator/device.  
-- For Android: run `./gradlew assembleDebug` or launch via Android Studio.  
-Demo: Provide a screen recording (for mobile) or hosted link (for web).
+Mobile: Not applicable (web-only project).  
+Demo: Provide a screen recording (for mobile) or hosted link (for web). The app runs locally at http://localhost:3000 (or next available port). No deployment required for demo; local testing via browser covers the full flow. For hosted demo, deploy to Vercel/Netlify: `npm run build` then upload the `build` folder.
 
 ## 2. Problem Understanding
 Summarize your understanding of the problem and mention assumptions made. The task requires a React web app for an interactive quiz: users select a topic (e.g., Wellness, Tech Trends, Science, History, Geography, Literature, Mathematics, Art), AI generates 5 MCQs with options/explanations, show loading during generation, display questions one-by-one with navigation/progress bar, and provide AI feedback on results based on score. Prompts ensure JSON output; include error handling/retries; reusable QuestionComponent. Assumptions: Mock data fallback without OpenAI key; medium difficulty; educational questions with explanations; web-only (no mobile); theme-specific mocks for relevance.
