@@ -1,34 +1,120 @@
-Sample README – AI-Assisted Knowledge Quiz:
+# AI Assisted Knowledge Quiz
 
-# AI-Assisted Knowledge Quiz
+*An interactive AI-powered learning experience.*
+
+---
 
 ## 1. Project Setup & Demo
-Web: Run `npm install && npm start` to launch locally.  
-Mobile: Not applicable (web-only project).  
-Demo: Provide a screen recording (for mobile) or hosted link (for web). The app runs locally at http://localhost:3000 (or next available port). No deployment required for demo; local testing via browser covers the full flow. For hosted demo, deploy to Vercel/Netlify: `npm run build` then upload the `build` folder.
+
+### Web
+
+* Run `npm install && npm start` to launch locally.
+* App will be available at: **[http://localhost:3000](http://localhost:3000)**
+
+### Deployment
+
+* For a hosted demo, build the app and deploy:
+
+  ```bash
+  npm run build
+  ```
+* Deploy the **`build/`** folder to [Vercel](https://vercel.com) or [Netlify](https://netlify.com).
+
+---
 
 ## 2. Problem Understanding
-Summarize your understanding of the problem and mention assumptions made. The task requires a React web app for an interactive quiz: users select a topic (e.g., Wellness, Tech Trends, Science, History, Geography, Literature, Mathematics, Art), AI generates 5 MCQs with options/explanations, show loading during generation, display questions one-by-one with navigation/progress bar, and provide AI feedback on results based on score. Prompts ensure JSON output; include error handling/retries; reusable QuestionComponent. Assumptions: Mock data fallback without OpenAI key; medium difficulty; educational questions with explanations; web-only (no mobile); theme-specific mocks for relevance.
+
+The project is a **web-based AI-assisted quiz application** that generates engaging and educational multiple-choice questions.
+
+### Features
+
+* Topic selection (Wellness, Tech Trends, Science, History, Geography, Literature, Mathematics, Art).
+* AI generates **5 MCQs** with options and explanations.
+* Loading screen while AI prepares questions.
+* Quiz flow with **progress bar** and **navigation controls**.
+* Results screen with **AI-generated feedback** and suggestions.
+
+### Assumptions
+
+* Mock data is used if no OpenAI API key is provided.
+* Questions default to medium difficulty.
+* Web-only interface (no mobile app).
+* Educational content is prioritized with explanations.
+
+---
 
 ## 3. AI Prompts & Iterations
-Document your initial prompts, issues faced, and refined prompts for better results. Initial: Simple "Generate 5 MCQs on [topic]". Issues: Inconsistent JSON (extra text, wrong structure, parse errors). Refined: System prompt "You are an expert quiz generator. Always respond with valid JSON only." User prompt specifies exact structure: {success: true, topic, description, questions: [{id, question, options: [], correctAnswer: 0-3, explanation}]}. For feedback: {success: true, feedback: {score, total, percentage, message, suggestions: [], encouragement}}. Iterations: Added retry on parse fail; temperature 0.7 for consistency; max_tokens 800; validation for 5 questions. Mock simulates this with theme-specific data (e.g., math for Mathematics).
+
+* **Initial prompt**: Generate 5 MCQs for the chosen topic.
+* **Challenges**: Inconsistent JSON, parsing errors.
+* **Solutions**:
+
+  * Refined system prompt enforcing strict JSON format.
+  * Added retry logic and error handling.
+  * Introduced mock fallback for development/testing.
+  * Adjusted temperature settings for stable results.
+
+---
 
 ## 4. Architecture & Code Structure
-- `App.js` or mobile `NavigationHost` manages navigation. App.js handles screen routing via state.  
-- Separate components/screens for each step: TopicSelection.js (screen 1), LoadingScreen.js (screen 2), QuizScreen.js with QuestionComponent.js (screen 3, reusable for question/options/selection), ResultsScreen.js (screen 4).  
-- `aiService.ts` / `AIClient.swift` / `AIRepository.kt` handles AI calls. openaiService.js: fetch to OpenAI, JSON parse/validate/retry, mock fallback.  
-- Use React Context, SwiftUI ObservableObject, or Jetpack ViewModel for state management. QuizContext.js: useReducer for state (screens, topic, questions, answers, score), memoized actions to avoid re-renders.
 
-## 5. Screenshots / Screen Recording
-Attach screenshots (web) or screen recording (mobile) covering all screens.  
-- Screen 1: Topic grid (8 cards with icons/descriptions); select navigates to loading.  
-- Screen 2: Loader card with spinner, "AI generating [topic] questions...", "May take a few seconds".  
-- Screen 3: Progress bar (1/5), QuestionComponent (question + radio options), Next/Prev buttons.  
-- Screen 4: Score (e.g., 3/5), feedback message/suggestions/encouragement, restart.  
-Local browser testing verifies; screenshots from dev tools or recording tool.
+* **App.js** → Manages navigation with React state.
+* **Screens**:
 
-## 6. Known Issues / Improvements
-List bugs or limitations and how you'd improve them with more time. Issues: Console OpenAI warnings (no key, uses mock); no session persistence; client-side key exposure. Improvements: Backend proxy for API; localStorage for progress; difficulty levels; more question types (T/F); ARIA accessibility; unit tests (Jest for service/context); PWA for offline.
+  * `TopicSelectionScreen`
+  * `LoadingScreen`
+  * `QuizScreen` (with reusable `QuestionComponent`)
+  * `ResultsScreen`
+* **Services**:
 
-## 7. Bonus Work
-Mention any extra polish or features added (animations, dark mode, etc.). Theme-specific mock questions for all topics (e.g., history events, math equations). Fixed re-render loop in LoadingScreen (memoized context). CSS animations (loader spinner, transitions). Progress bar. Error toasts. Responsive grid/flex layout.
+  * `openaiService.js` → Handles API calls, JSON parsing, mock fallback.
+* **State Management**:
+
+  * `QuizContext.js` using React Context + `useReducer`.
+
+---
+
+## 5. Screenshots / Demo Preview
+
+* **Topic Selection** → Grid of 8 cards.
+* **Loading Screen** → Spinner with AI generation message.
+* **Quiz Screen** → Question display, progress bar, navigation.
+* **Results Screen** → Final score, personalized feedback, restart option.
+
+(Screenshots or a short demo video can be attached here.)
+
+---
+
+## 6. Known Issues & Future Improvements
+
+### Current Issues
+
+* Console warnings when API key is missing (mock fallback used).
+* No persistence (session lost on refresh).
+* Client-side API key exposure.
+
+### Future Enhancements
+
+* Backend proxy for secure API handling.
+* LocalStorage or IndexedDB for quiz persistence.
+* Difficulty level selection.
+* Additional question formats (e.g., True/False).
+* Accessibility improvements.
+* Unit testing and CI integration.
+* PWA support for offline usage.
+
+---
+
+## 7. Bonus Enhancements
+
+* Predefined **theme-specific mock questions**.
+* Smooth **CSS animations** (loading spinner, transitions).
+* Enhanced **progress bar** with percentage.
+* Error handling via **toasts/alerts**.
+* Fully responsive design (grid/flex layouts).
+* Fixed re-render loops with memoization.
+* **Dark/Light Mode toggle** for a customizable user experience.
+
+---
+
+✨ This project combines **AI-driven content generation**, **modern React architecture**, and **polished UI design** to deliver an engaging and professional interactive quiz experience.
